@@ -9,12 +9,12 @@ import "./messageContract.sol";
 contract MessageContractFactory {
     address[] public contracts;
 
-    function createMessageContract(string memory initialMessage) public {
+    function createMessageContract(string memory initialMessage) external {
         MessageContract mc = new MessageContract(initialMessage);
         contracts.push(address(mc));
     }
 
-    function getDeployedContracts() public view returns (address[] memory) {
+    function getDeployedContracts() external view returns (address[] memory) {
         return contracts;
     }
 }

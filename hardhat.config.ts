@@ -1,33 +1,33 @@
+// import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+require("dotenv").config({ path: ".env" });
 
-require("dotenv").config();
+const ALCHEMY_MAINNET_API_KEY_URL = process.env.ALCHEMY_MAINNET_API_KEY_URL;
 
-const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL;
-const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
-const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
-const PRIVATE_KEY = process.env.PRIVATE_KEY_1;
+//const ALCHEMY_SEPOLIA_API_KEY_URL = process.env.ALCHEMY_SEPOLIA_API_KEY_URL;
+
+const ALCHEMY_MUMBAI_API_KEY_URL = process.env.ALCHEMY_MUMBAI_API_KEY_URL;
+
+const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY;
 
 module.exports = {
-    solidity: "0.8.24",
-    networks: {
-        mumbai: {
-            url: MUMBAI_RPC_URL,
-            accounts: [PRIVATE_KEY]
-        },
-        sepolia: {
-            url: SEPOLIA_RPC_URL,
-            accounts: [PRIVATE_KEY]
-        },
-        goerli: {
-            url: GOERLI_RPC_URL,
-            accounts: [PRIVATE_KEY]
-        },
+  solidity: "0.8.24",
+  networks: {
+    hardhat: {
+      forking: {
+        url: ALCHEMY_MAINNET_API_KEY_URL,
+      }
     },
-    etherscan: {
-        apiKey: ETHERSCAN_API_KEY,
+    mumbai: {
+      url: ALCHEMY_MUMBAI_API_KEY_URL,
+      accounts: [ACCOUNT_PRIVATE_KEY],
     },
-    sourcify: {
-        enabled: true,
-    },
-}
+    // sepolia: {
+    //   url: ALCHEMY_SEPOLIA_API_KEY_URL,
+    //   accounts: [ACCOUNT_PRIVATE_KEY],
+    
+    
+  },
+  // lockGasLimit: 200000000000,
+  // gasPrice: 10000000000,
+};
